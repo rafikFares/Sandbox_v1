@@ -1,7 +1,8 @@
-package com.example.sightcall
+package com.example.sightcall.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.sightcall.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
