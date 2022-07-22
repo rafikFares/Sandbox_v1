@@ -74,6 +74,8 @@ android {
 }
 
 dependencies {
+    // uiBox
+    implementation project(':uiBox')
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
