@@ -1,12 +1,12 @@
 package com.example.sightcall.core.repository.remote.data
 
-
+import com.example.sightcall.core.repository.data.GitHubRepository
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiRepository(
+data class ApiGitHubRepository(
     @SerialName("created_at")
     val createdAt: Instant,
     @SerialName("default_branch")
@@ -27,4 +27,14 @@ data class ApiRepository(
     val owner: ApiOwner = ApiOwner(),
     @SerialName("forks_count")
     val forksCount: Int = 0
-)
+) {
+    fun toGitHubRepository(): GitHubRepository = GitHubRepository(
+        repositoryName = name,
+        repositoryOwner = owner.login,
+        repositoryOwnerAvatarUrl = owner.avatarUrl,
+        repositoryLanguage = language,
+        repositorySshUrl = sshUrl,
+        repositoryDefaultBranch = defaultBranch,
+        repositoryLicence = apiLicense?.spdxId
+    )
+}

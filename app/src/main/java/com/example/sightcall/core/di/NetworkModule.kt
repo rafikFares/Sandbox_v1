@@ -53,7 +53,7 @@ val networkModule = module {
             useAlternativeNames = false
         }
 
-        provideJson()
+        provideJson(true, true)
     }
 
     // provide Retrofit
