@@ -9,5 +9,7 @@
     <color name="color_text_primary">#112b50</color>
     <color name="color_text_secondary">#99112B50</color>
     <color name="color_text_tertiary">#4D112B50</color>
+    <color name="color_red">#FF2A5A</color>
+    <color name="color_purple_20">#335C44DE</color>
 
 </resources>
