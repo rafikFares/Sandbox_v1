@@ -7,14 +7,6 @@ import kotlinx.serialization.Serializable
 data class ApiOwner(
     @SerialName("avatar_url")
     val avatarUrl: String = "",
-    @SerialName("events_url")
-    val eventsUrl: String = "",
-    @SerialName("followers_url")
-    val followersUrl: String = "",
-    @SerialName("following_url")
-    val followingUrl: String = "",
-    @SerialName("gists_url")
-    val gistsUrl: String = "",
     @SerialName("gravatar_id")
     val gravatarId: String = "",
     @SerialName("html_url")
@@ -25,18 +17,10 @@ data class ApiOwner(
     val login: String = "",
     @SerialName("node_id")
     val nodeId: String = "",
-    @SerialName("organizations_url")
-    val organizationsUrl: String = "",
-    @SerialName("received_events_url")
-    val receivedEventsUrl: String = "",
-    @SerialName("repos_url")
-    val reposUrl: String = "",
     @SerialName("site_admin")
     val siteAdmin: Boolean = false,
     @SerialName("starred_url")
     val starredUrl: String = "",
-    @SerialName("subscriptions_url")
-    val subscriptionsUrl: String = "",
     @SerialName("type")
     val type: String = "",
     @SerialName("url")

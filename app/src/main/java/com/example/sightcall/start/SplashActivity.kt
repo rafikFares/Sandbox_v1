@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.example.sightcall.main.MainActivity
+import com.example.sightcall.main.GitHubItemsActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
         splashScreen.setKeepOnScreenCondition { true }
         lifecycleScope.launch {
             delay(400)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, GitHubItemsActivity::class.java))
             finish()
         }
     }
