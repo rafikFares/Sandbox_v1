@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.sightcall.core.di.appModule
 import com.example.sightcall.core.di.dispatcherModule
+import com.example.sightcall.core.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -22,7 +23,7 @@ class SightCallApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(appContext)
-            modules(dispatcherModule + appModule)
+            modules(dispatcherModule + networkModule + appModule)
         }
 
     }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SightCall</string>
+    <string name="app_name_debug">SightCall-Debug</string>
 </resources>

@@ -8,11 +8,12 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import kotlin.coroutines.CoroutineContext
+
 
 private const val SIGHTCALL_PREFERENCES = "sightCallPreferences"
 
@@ -24,7 +25,6 @@ val appModule = module {
             get(named("Dispatcher.IO"))
         )
     }
-
 
 }
 
