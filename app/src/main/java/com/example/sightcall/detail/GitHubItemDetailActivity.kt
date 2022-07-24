@@ -1,18 +1,16 @@
-package com.example.sightcall.main
+package com.example.sightcall.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sightcall.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GitHubItemsActivity : AppCompatActivity() {
-
-    private val gitHubItemsViewModel by viewModel<GitHubItemsViewModel>()
+class GitHubItemDetailActivity : AppCompatActivity() {
+    private val gitHubItemDetailViewModel by viewModel<GitHubItemDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        gitHubItemsViewModel.loadData()
     }
 }
