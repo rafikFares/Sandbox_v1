@@ -20,7 +20,7 @@
         android:name=".SightCallApplication"
         tools:targetApi="32">
         <activity
-            android:name=".start.SplashActivity"
+            android:name=".start.StartActivity"
             android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
