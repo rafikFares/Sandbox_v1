@@ -1,10 +1,12 @@
 package com.example.sightcall.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.sightcall.R
 import com.example.sightcall.databinding.ActivityGithubItemsBinding
+import com.example.sightcall.main.detail.GitHubItemDetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GitHubItemsActivity : AppCompatActivity() {
@@ -25,7 +27,8 @@ class GitHubItemsActivity : AppCompatActivity() {
 
     private fun initActions() {
         binding.searchView.setExitAction {
-            finish()
+            //finish()
+            startActivity(Intent(this@GitHubItemsActivity, GitHubItemDetailActivity::class.java))
         }
     }
 }

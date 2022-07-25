@@ -35,6 +35,11 @@
             android:theme="@style/Theme.SightCall"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".main.detail.GitHubItemDetailActivity"
+            android:theme="@style/Theme.SightCall.Transparent"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

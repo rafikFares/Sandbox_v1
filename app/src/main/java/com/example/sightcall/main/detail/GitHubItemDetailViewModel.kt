@@ -1,6 +1,7 @@
 package com.example.sightcall.main.detail
 
 import android.util.Log
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 class GitHubItemDetailViewModel(
     private val fetchGitHubItemDetails: FetchGitHubItemDetails
-) : ViewModel() {
+) : ViewModel(), DefaultLifecycleObserver {
 
     private val _failure: MutableLiveData<SightCallException> = MutableLiveData()
     val failure: LiveData<SightCallException> = _failure

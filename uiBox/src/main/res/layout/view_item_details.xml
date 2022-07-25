@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layoutDescription="@xml/motion_scene_item_details"
+    tools:parentTag="androidx.constraintlayout.motion.widget.MotionLayout">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/itemIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/spacing_l"
+        android:background="@color/color_black"
+        android:elevation="@dimen/elevation_6"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:round="@dimen/radius_25" />
+
+    <TextView
+        android:id="@+id/itemName"
+        style="@style/Body.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_s"
+        android:layout_marginEnd="@dimen/spacing_s"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_text_primary"
+        app:layout_constraintBottom_toTopOf="@id/itemLanguage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemIcon"
+        app:layout_constraintTop_toTopOf="@id/itemIcon"
+        tools:text="Android" />
+
+    <TextView
+        android:id="@+id/itemLanguage"
+        style="@style/SmallText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_s"
+        android:layout_marginEnd="@dimen/spacing_s"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_text_tertiary"
+        app:layout_constraintBottom_toBottomOf="@id/itemIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemIcon"
+        app:layout_constraintTop_toBottomOf="@id/itemName"
+        tools:text="Python" />
+
+    <TextView
+        android:id="@+id/itemInformation"
+        style="@style/SmallText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/spacing_s"
+        android:layout_marginVertical="@dimen/spacing_l"
+        android:ellipsize="end"
+        android:textColor="@color/color_text_tertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemLanguage"
+        tools:text="Python" />
+
+</merge>
