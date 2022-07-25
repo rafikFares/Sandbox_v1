@@ -1,6 +1,8 @@
 package com.example.sightcall.main
 
 import android.util.Log
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +11,13 @@ import com.example.sightcall.BuildConfig
 import com.example.sightcall.core.exception.SightCallException
 import com.example.sightcall.core.repository.data.GitHubItem
 import com.example.sightcall.core.usecase.FetchGitHubItems
+import com.example.sightcall.main.adapter.GitHubItemsAdapter
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 class GitHubItemsViewModel(
     private val fetchGitHubItems: FetchGitHubItems
-) : ViewModel() {
+) : ViewModel(), DefaultLifecycleObserver {
 
     private val _failure: MutableLiveData<SightCallException> = MutableLiveData()
     val failure: LiveData<SightCallException> = _failure
@@ -22,7 +25,13 @@ class GitHubItemsViewModel(
     private val _gitHubItems: MutableLiveData<List<GitHubItem>> = MutableLiveData()
     val gitHubItems: LiveData<List<GitHubItem>> = _gitHubItems
 
-    fun loadData() = fetchGitHubItems(null, viewModelScope) {
+    val gitHubItemsAdapter: GitHubItemsAdapter = GitHubItemsAdapter(this)
+
+    override fun onCreate(owner: LifecycleOwner) {
+        loadData()
+    }
+
+    private fun loadData() = fetchGitHubItems(null, viewModelScope) {
         it.fold(::handleFailure, ::handleSuccess)
     }
 
@@ -34,6 +43,11 @@ class GitHubItemsViewModel(
     private fun handleSuccess(success: List<GitHubItem>) {
         log("handleSuccess count : ${success.count()}")
         _gitHubItems.value = success
+        gitHubItemsAdapter.submitList(success)
+    }
+
+    fun handleItemClick(item: GitHubItem) {
+        log("handleItemClick item : $item")
     }
 
 

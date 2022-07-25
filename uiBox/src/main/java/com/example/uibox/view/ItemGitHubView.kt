@@ -38,8 +38,8 @@ class ItemGitHubView @JvmOverloads constructor(
         clipToPadding = true
 
         shapeAppearanceModel = ShapeAppearanceModel.builder()
-            .setTopRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_15))
-            .setBottomRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_15))
+            .setTopRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_25))
+            .setBottomRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_25))
             .build()
     }
 
@@ -52,7 +52,7 @@ class ItemGitHubView @JvmOverloads constructor(
                 .into(avatarIcon)
         }
         setOnClickListener {
-            binding.avatarIcon.animateClick {
+            binding.arrowNext.animateClick {
                 clickAction(itemGitHubData)
             }
         }

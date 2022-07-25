@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/spacing_xxs"
         android:background="@color/color_white"
         android:elevation="@dimen/elevation_6"
-        android:padding="6dp"
+        android:scaleType="centerCrop"
         tools:src="@android:mipmap/sym_def_app_icon"
         app:layout_constraintBottom_toTopOf="@id/bottom_separator"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +68,9 @@
 
     <View
         android:id="@+id/bottom_separator"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="2dp"
+        android:layout_marginEnd="@dimen/radius_25"
         android:background="@color/color_purple_20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
