@@ -1,10 +1,10 @@
 package com.example.sightcall.main.start
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sightcall.BuildConfig
 import com.example.sightcall.core.session.UserSession
+import com.example.sightcall.main.platform.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,14 +12,16 @@ import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-class StartViewModel(private val userSession: UserSession) : ViewModel() {
+class StartViewModel(private val userSession: UserSession) : BaseViewModel() {
 
-    enum class UiState {
-        Init, Connected, NotConnected
+    sealed interface UiState : BaseUiState {
+        object Init : UiState
+        object Connected : UiState
+        object NotConnected : UiState
     }
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Init)
-    val uiState: StateFlow<UiState> = _uiState
+    override val uiState: StateFlow<UiState> = _uiState
 
     init {
         viewModelScope.launch {
@@ -33,7 +35,7 @@ class StartViewModel(private val userSession: UserSession) : ViewModel() {
         }
     }
 
-    private fun log(message: String, exception: Exception? = null) {
+    override fun log(message: String, exception: Exception?) {
         if (BuildConfig.DEBUG) {
             Log.d("StartViewModel", message, exception)
         }

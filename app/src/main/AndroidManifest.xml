@@ -22,7 +22,8 @@
         <activity
             android:name="com.example.sightcall.main.start.StartActivity"
             android:theme="@style/Theme.App.Starting"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,12 +34,14 @@
         <activity
             android:name=".main.home.GitHubItemsActivity"
             android:theme="@style/Theme.SightCall"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".main.detail.GitHubItemDetailActivity"
             android:theme="@style/Theme.SightCall.Transparent"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

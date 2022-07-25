@@ -12,7 +12,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="@dimen/spacing_l"
-        android:background="@color/color_black"
+        android:background="@color/color_white_no_binary"
         android:elevation="@dimen/elevation_6"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,15 +22,16 @@
     <TextView
         android:id="@+id/itemName"
         style="@style/Body.Bold"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_s"
         android:layout_marginEnd="@dimen/spacing_s"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/color_text_primary"
-        app:layout_constraintBottom_toTopOf="@id/itemLanguage"
+        app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/itemIcon"
         app:layout_constraintTop_toTopOf="@id/itemIcon"
         tools:text="Android" />
@@ -38,32 +39,31 @@
     <TextView
         android:id="@+id/itemLanguage"
         style="@style/SmallText"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_s"
         android:layout_marginEnd="@dimen/spacing_s"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/color_text_tertiary"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="@id/itemIcon"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/itemIcon"
         app:layout_constraintTop_toBottomOf="@id/itemName"
         tools:text="Python" />
 
-    <TextView
-        android:id="@+id/itemInformation"
-        style="@style/SmallText"
+    <LinearLayout
+        android:id="@+id/itemInformationContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/spacing_s"
         android:layout_marginVertical="@dimen/spacing_l"
-        android:ellipsize="end"
-        android:textColor="@color/color_text_tertiary"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemLanguage"
-        tools:text="Python" />
+        app:layout_constraintTop_toBottomOf="@id/itemLanguage" />
 
 </merge>

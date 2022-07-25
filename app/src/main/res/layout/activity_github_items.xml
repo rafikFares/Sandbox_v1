@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.sightcall.main.home.GitHubItemsViewModel" />
+            type="com.example.sightcall.main.detail.GitHubItemsViewModel" />
 
     </data>
 

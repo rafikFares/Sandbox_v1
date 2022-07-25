@@ -12,6 +12,7 @@ import com.example.uibox.tools.StringSource
 import com.example.uibox.tools.StringSourceData
 import com.example.uibox.tools.animateClick
 import com.example.uibox.tools.applyStringSource
+import com.example.uibox.tools.clickWithDebounce
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -51,7 +52,7 @@ class ItemGitHubView @JvmOverloads constructor(
                 .load(itemGitHubData.itemAvatarUrl)
                 .into(avatarIcon)
         }
-        setOnClickListener {
+        clickWithDebounce {
             binding.arrowNext.animateClick {
                 clickAction(itemGitHubData)
             }

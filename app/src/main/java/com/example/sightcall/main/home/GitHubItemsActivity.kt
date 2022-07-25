@@ -4,9 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.sightcall.R
 import com.example.sightcall.databinding.ActivityGithubItemsBinding
 import com.example.sightcall.main.detail.GitHubItemDetailActivity
+import com.example.sightcall.main.detail.GitHubItemsViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GitHubItemsActivity : AppCompatActivity() {
@@ -30,5 +35,27 @@ class GitHubItemsActivity : AppCompatActivity() {
             //finish()
             startActivity(Intent(this@GitHubItemsActivity, GitHubItemDetailActivity::class.java))
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                gitHubItemsViewModel.uiState
+                    .collect { state ->
+                        when (state) {
+                            is GitHubItemsViewModel.UiState.ItemClick -> {
+                                val intent = GitHubItemDetailActivity.create(
+                                    context = this@GitHubItemsActivity,
+                                    ownerName = state.item.repositoryOwner,
+                                    repoName = state.item.repositoryName,
+                                )
+                                startActivity(intent)
+                            }
+                            else -> {
+
+                            }
+                        }
+                    }
+            }
+        }
+
     }
 }

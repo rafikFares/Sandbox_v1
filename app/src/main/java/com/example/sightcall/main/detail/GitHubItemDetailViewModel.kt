@@ -1,45 +1,57 @@
 package com.example.sightcall.main.detail
 
 import android.util.Log
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sightcall.BuildConfig
 import com.example.sightcall.core.exception.SightCallException
 import com.example.sightcall.core.repository.data.GitHubItemDetails
 import com.example.sightcall.core.repository.remote.RemoteRepository
 import com.example.sightcall.core.usecase.FetchGitHubItemDetails
+import com.example.sightcall.main.platform.BaseViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 class GitHubItemDetailViewModel(
     private val fetchGitHubItemDetails: FetchGitHubItemDetails
-) : ViewModel(), DefaultLifecycleObserver {
+) : BaseViewModel() {
 
-    private val _failure: MutableLiveData<SightCallException> = MutableLiveData()
-    val failure: LiveData<SightCallException> = _failure
-
-    private val _gitHubItemDetails: MutableLiveData<GitHubItemDetails> = MutableLiveData()
-    val gitHubItemDetails: LiveData<GitHubItemDetails> = _gitHubItemDetails
-
-    fun loadData(information: RemoteRepository.RepositoryInformation) = fetchGitHubItemDetails(information, viewModelScope) {
-        it.fold(::handleFailure, ::handleSuccess)
+    sealed interface UiState : BaseUiState {
+        object Init : UiState
+        object Loading : UiState
+        data class UpdateData(val gitHubItemDetails: GitHubItemDetails) : UiState
+        data class Error(val exception: SightCallException) : UiState
     }
 
-    private fun handleFailure(failure: SightCallException) {
-        log("handleFailure", failure)
-        _failure.value = failure
+    private val _uiState = MutableStateFlow<UiState>(UiState.Init)
+    override val uiState: StateFlow<UiState> = _uiState
+
+    fun loadData(information: RemoteRepository.RepositoryInformation) {
+        viewModelScope.launch {
+            _uiState.value = UiState.Loading
+        }
+        fetchGitHubItemDetails(information, viewModelScope) {
+            it.fold(::handleFailure, ::handleSuccess)
+        }
+    }
+
+    override fun handleFailure(failure: SightCallException) {
+        super.handleFailure(failure)
+        viewModelScope.launch {
+            _uiState.value = UiState.Error(failure)
+        }
     }
 
     private fun handleSuccess(success: GitHubItemDetails) {
         log("handleSuccess count : $success")
-        _gitHubItemDetails.value = success
+        viewModelScope.launch {
+            _uiState.value = UiState.UpdateData(success)
+        }
     }
 
-
-    private fun log(message: String, exception: Exception? = null) {
+    override fun log(message: String, exception: Exception?) {
         if (BuildConfig.DEBUG) {
             Log.d("GitHubItemDetailViewModel", message, exception)
         }

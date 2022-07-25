@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sightcall.core.repository.data.GitHubItem
-import com.example.sightcall.main.home.GitHubItemsViewModel
+import com.example.sightcall.main.detail.GitHubItemsViewModel
 import com.example.uibox.tools.StringSource
 import com.example.uibox.view.ItemGitHubView
 
