@@ -3,7 +3,7 @@ package com.example.sightcall
 import io.mockk.MockKAnnotations
 import org.junit.rules.TestRule
 
-object InjectMocksRule {
+interface BaseTest {
     fun create(testClass: Any) = TestRule { statement, _ ->
         MockKAnnotations.init(testClass, relaxUnitFun = true)
         statement

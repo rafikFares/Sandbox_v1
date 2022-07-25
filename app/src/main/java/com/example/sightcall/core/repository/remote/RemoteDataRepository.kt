@@ -41,9 +41,7 @@ class RemoteDataRepository(
                 val response = api.fetchRepositoryOf(ownerName = params.ownerName, repoName = params.repoName)
                 if (response.isSuccessful) {
                     val bodyData = response.body()
-                    val result =  bodyData?.let {
-                        it.toGitHubRepository()
-                    } ?: GitHubItemDetails.empty
+                    val result =  bodyData?.toGitHubRepository() ?: GitHubItemDetails.empty
 
                     return Either.Success(result)
                 }

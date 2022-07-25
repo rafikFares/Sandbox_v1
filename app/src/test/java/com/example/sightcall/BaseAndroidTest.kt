@@ -15,12 +15,12 @@ import org.robolectric.annotation.Config
     manifest = Config.NONE,
     sdk = [Build.VERSION_CODES.O]
 )
-abstract class BaseAndroidTest {
+abstract class BaseAndroidTest: BaseTest {
 
     @Suppress("LeakingThis")
     @Rule
     @JvmField
-    val injectMocks = InjectMocksRule.create(this@BaseAndroidTest)
+    val injectMocks = create(this@BaseAndroidTest)
 
     val appContext: Context
         get() = ApplicationProvider.getApplicationContext()

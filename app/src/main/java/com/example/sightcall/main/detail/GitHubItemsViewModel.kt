@@ -6,13 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sightcall.BuildConfig
-import com.example.sightcall.core.exception.SightCallException
 import com.example.sightcall.core.repository.data.GitHubItem
-import com.example.sightcall.core.repository.data.GitHubItemDetails
 import com.example.sightcall.core.usecase.FetchGitHubItems
 import com.example.sightcall.main.home.adapter.GitHubItemsAdapter
 import com.example.sightcall.main.platform.BaseViewModel
-import com.example.sightcall.main.start.StartViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
