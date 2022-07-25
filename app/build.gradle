@@ -124,6 +124,9 @@ dependencies {
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
+    // Facebook shimmer
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
+
     // tests
     testImplementation "junit:junit:4.13.2"
     // instrumentation test
