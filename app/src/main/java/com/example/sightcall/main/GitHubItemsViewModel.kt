@@ -28,10 +28,10 @@ class GitHubItemsViewModel(
     val gitHubItemsAdapter: GitHubItemsAdapter = GitHubItemsAdapter(this)
 
     override fun onCreate(owner: LifecycleOwner) {
-        loadData()
+        loadData() // default with "text" as string
     }
 
-    private fun loadData() = fetchGitHubItems(null, viewModelScope) {
+    private fun loadData(params: String? = null) = fetchGitHubItems(params, viewModelScope) {
         it.fold(::handleFailure, ::handleSuccess)
     }
 
@@ -50,6 +50,10 @@ class GitHubItemsViewModel(
         log("handleItemClick item : $item")
     }
 
+    val searchAction: (String) -> Unit = {
+        log("searchAction content : $it")
+        loadData(it)
+    }
 
     private fun log(message: String, exception: Exception? = null) {
         if (BuildConfig.DEBUG) {

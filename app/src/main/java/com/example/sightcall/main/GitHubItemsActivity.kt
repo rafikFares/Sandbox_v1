@@ -19,5 +19,13 @@ class GitHubItemsActivity : AppCompatActivity() {
         binding.viewmodel = gitHubItemsViewModel
         binding.lifecycleOwner = this@GitHubItemsActivity
         lifecycle.addObserver(gitHubItemsViewModel)
+
+        initActions()
+    }
+
+    private fun initActions() {
+        binding.searchView.setExitAction {
+            finish()
+        }
     }
 }
