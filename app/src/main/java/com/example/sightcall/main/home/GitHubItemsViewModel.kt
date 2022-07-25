@@ -1,4 +1,4 @@
-package com.example.sightcall.main
+package com.example.sightcall.main.home
 
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -11,7 +11,7 @@ import com.example.sightcall.BuildConfig
 import com.example.sightcall.core.exception.SightCallException
 import com.example.sightcall.core.repository.data.GitHubItem
 import com.example.sightcall.core.usecase.FetchGitHubItems
-import com.example.sightcall.main.adapter.GitHubItemsAdapter
+import com.example.sightcall.main.home.adapter.GitHubItemsAdapter
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel

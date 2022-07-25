@@ -1,4 +1,4 @@
-package com.example.sightcall.start
+package com.example.sightcall.main.start
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,8 +8,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.sightcall.login.LoginActivity
-import com.example.sightcall.main.GitHubItemsActivity
+import com.example.sightcall.main.login.LoginActivity
+import com.example.sightcall.main.home.GitHubItemsActivity
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

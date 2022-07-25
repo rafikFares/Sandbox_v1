@@ -1,4 +1,4 @@
-package com.example.sightcall.detail
+package com.example.sightcall.main.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData

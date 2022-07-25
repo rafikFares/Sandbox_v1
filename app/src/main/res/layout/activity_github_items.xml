@@ -8,14 +8,14 @@
 
         <variable
             name="viewmodel"
-            type="com.example.sightcall.main.GitHubItemsViewModel" />
+            type="com.example.sightcall.main.home.GitHubItemsViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.GitHubItemsActivity">
+        tools:context=".main.home.GitHubItemsActivity">
 
         <com.example.uibox.view.SearchView
             android:id="@+id/searchView"

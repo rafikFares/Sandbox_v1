@@ -1,4 +1,4 @@
-package com.example.sightcall.main
+package com.example.sightcall.main.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.example.sightcall.start
+package com.example.sightcall.main.start
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
