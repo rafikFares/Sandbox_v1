@@ -5,7 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/google_news.xml" value="0.281" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5177083333333333" />
-        <entry key="uiBox/src/main/res/layout/item_github.xml" value="0.1" />
+        <entry key="uiBox/src/main/res/drawable/ic_baseline_arrow.xml" value="0.4535" />
+        <entry key="uiBox/src/main/res/layout/item_github.xml" value="0.5" />
       </map>
     </option>
   </component>

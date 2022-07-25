@@ -3,26 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="@android:color/transparent"
     android:layout_width="match_parent"
-    android:layout_height="65dp">
+    android:layout_height="65dp"
+    android:background="@android:color/transparent">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/webStoreIcon"
+        android:id="@+id/avatarIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginVertical="@dimen/spacing_xs"
         android:layout_marginStart="@dimen/spacing_xxs"
-        app:round="16dp"
         android:background="@color/color_white"
-        android:elevation="@dimen/elevation_12"
+        android:elevation="@dimen/elevation_6"
         android:padding="6dp"
+        tools:src="@android:mipmap/sym_def_app_icon"
         app:layout_constraintBottom_toTopOf="@id/bottom_separator"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:round="16dp" />
 
     <TextView
-        android:id="@+id/webStoreName"
+        android:id="@+id/itemName"
         style="@style/Body.Bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,15 +31,15 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/color_text_primary"
-        app:layout_constraintBottom_toTopOf="@id/webStoreUrl"
+        app:layout_constraintBottom_toTopOf="@id/itemLanguage"
         app:layout_constraintEnd_toStartOf="@id/arrowNext"
-        app:layout_constraintStart_toEndOf="@id/webStoreIcon"
-        app:layout_constraintTop_toTopOf="@id/webStoreIcon"
+        app:layout_constraintStart_toEndOf="@id/avatarIcon"
+        app:layout_constraintTop_toTopOf="@id/avatarIcon"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Carrefour" />
+        tools:text="Android" />
 
     <TextView
-        android:id="@+id/webStoreUrl"
+        android:id="@+id/itemLanguage"
         style="@style/SmallText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,21 +47,23 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/color_text_tertiary"
-        app:layout_constraintBottom_toBottomOf="@id/webStoreIcon"
+        app:layout_constraintBottom_toBottomOf="@id/avatarIcon"
         app:layout_constraintEnd_toStartOf="@id/arrowNext"
-        app:layout_constraintStart_toEndOf="@id/webStoreIcon"
-        app:layout_constraintTop_toBottomOf="@id/webStoreName"
-        tools:text="https//abcdresdgjsdflkgodfkl" />
+        app:layout_constraintStart_toEndOf="@id/avatarIcon"
+        app:layout_constraintTop_toBottomOf="@id/itemName"
+        tools:text="Python" />
 
     <ImageView
         android:id="@+id/arrowNext"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginVertical="@dimen/spacing_s"
+        android:src="@drawable/ic_baseline_arrow"
         app:layout_constraintBottom_toTopOf="@id/bottom_separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/color_red" />
+        app:tint="@color/color_red"
+        tools:ignore="ContentDescription" />
 
 
     <View
