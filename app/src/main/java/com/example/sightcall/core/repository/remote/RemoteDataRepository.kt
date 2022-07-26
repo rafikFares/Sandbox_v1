@@ -17,7 +17,7 @@ class RemoteDataRepository(
     override suspend fun githubItems(params: String?): Either<SightCallException, List<GitHubItem>> {
         if (networkHandler.isNetworkAvailable()) {
             try {
-                val response = api.fetchRepositories(params ?: "text")
+                val response = api.fetchRepositories(params ?: "text") // for the moment i don't return "EmptyParamsException" but i just use "text" as default
                 if (response.isSuccessful) {
                     val bodyData = response.body()?.items ?: emptyList()
                     val result = bodyData.map {

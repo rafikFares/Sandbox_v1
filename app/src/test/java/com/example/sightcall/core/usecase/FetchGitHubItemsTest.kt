@@ -1,6 +1,7 @@
 package com.example.sightcall.core.usecase
 
 import com.example.sightcall.BaseUnitTest
+import com.example.sightcall.core.repository.local.LocalRepository
 import com.example.sightcall.core.repository.remote.RemoteRepository
 import com.example.sightcall.core.utils.Either
 import io.mockk.every
@@ -19,15 +20,22 @@ class FetchGitHubItemsTest: BaseUnitTest() {
 
     @MockK
     private lateinit var remoteRepository: RemoteRepository
+    @MockK
+    private lateinit var localRepository: LocalRepository
 
     @BeforeTest
     fun setUp() {
-        fetchGitHubItems = FetchGitHubItems(remoteRepository)
+        fetchGitHubItems = FetchGitHubItems(remoteRepository, localRepository)
         every {
             runBlocking {
                 remoteRepository.githubItems(any())
             }
         } returns Either.Success(emptyList())
+        every {
+            runBlocking {
+                localRepository.insertItem(any(), any())
+            }
+        } returns Either.Success(true)
     }
 
     @Test
