@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/stat_sys_download.xml" value="0.401" />
         <entry key="app/src/main/res/drawable/google_news.xml" value="0.281" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.25832492431886983" />
         <entry key="app/src/main/res/layout/activity_github_items.xml" value="0.24974772956609487" />
