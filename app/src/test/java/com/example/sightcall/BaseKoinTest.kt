@@ -1,6 +1,7 @@
 package com.example.sightcall
 
 import com.example.sightcall.core.di.appModule
+import com.example.sightcall.core.di.dataBaseModule
 import com.example.sightcall.core.di.dispatcherModule
 import com.example.sightcall.core.di.networkModule
 import io.mockk.mockkClass
@@ -23,7 +24,11 @@ class BaseKoinTest : KoinTest, BaseAndroidTest() {
                 androidContext(appContext)
                 printLogger()
                 modules(
-                    dispatcherModule + networkModule + defaultModule + appModule
+                    dispatcherModule +
+                        networkModule +
+                        dataBaseModule +
+                        defaultModule +
+                        appModule
                 )
             }
         }
