@@ -1,6 +1,5 @@
 package com.example.sandbox.main.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,7 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.sandbox.R
 import com.example.sandbox.databinding.ActivityGithubItemsBinding
+import com.example.sandbox.main.alert.DefaultAlert
 import com.example.sandbox.main.detail.ItemDetailActivity
+import com.example.uibox.tools.StringSource
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,8 +32,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initActions() {
         binding.searchView.setExitAction {
-            //finish()
-            startActivity(Intent(this@HomeActivity, ItemDetailActivity::class.java))
+            lifecycleScope.launch {
+                val result = DefaultAlert.create(this@HomeActivity, message = StringSource.Res(R.string.message_exit))
+                when (result) {
+                    DefaultAlert.AlertResult.Positive -> {
+                        finish()
+                    }
+                    DefaultAlert.AlertResult.Negative,
+                    DefaultAlert.AlertResult.Cancel -> {
+                        // Nothing
+                    }
+                }
+            }
         }
 
         lifecycleScope.launch {
