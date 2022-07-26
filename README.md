@@ -3,6 +3,7 @@
 ## Todo : 
 - Loading / Progress
 - Handle Errors / Error Alert
-- Tests
+- Test local repoo + test viewmodels + update test for fetch use case with local
 - Cache last search 
+- Cache for Glide
 - Login / Register
