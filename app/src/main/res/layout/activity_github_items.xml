@@ -8,14 +8,14 @@
 
         <variable
             name="viewmodel"
-            type="com.example.sightcall.main.detail.GitHubItemsViewModel" />
+            type="com.example.sandbox.main.home.HomeViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.home.GitHubItemsActivity">
+        tools:context=".main.home.HomeActivity">
 
         <com.example.uibox.view.SearchView
             android:id="@+id/searchView"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchView"
-            bind:initAdapter="@{viewmodel.gitHubItemsAdapter}"
+            bind:initAdapter="@{viewmodel.homeAdapter}"
             tools:itemCount="30" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

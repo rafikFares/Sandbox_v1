@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "SightCall"
+rootProject.name = "Sandbox"
 include ':app'
 include ':uiBox'

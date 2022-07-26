@@ -1,4 +1,4 @@
-<resources>
-    <string name="app_name">SightCall</string>
-    <string name="app_name_debug">SightCall-Debug</string>
+<resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Sandbox</string>
+    <string name="app_name_debug">Sandbox-Debug</string>
 </resources>

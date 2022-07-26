@@ -1,15 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SightCall" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+    <style name="Theme.Sandbox" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/purple_500</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/google_news</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
-        <item name="postSplashScreenTheme">@style/Theme.SightCall</item>
+        <item name="postSplashScreenTheme">@style/Theme.Sandbox</item>
     </style>
 
-    <style name="Theme.SightCall.Transparent">
+    <style name="Theme.Sandbox.Transparent">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

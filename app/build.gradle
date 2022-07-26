@@ -28,7 +28,7 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.example.sightcall"
+        applicationId "com.example.sandbox"
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
