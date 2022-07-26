@@ -5,4 +5,6 @@ sealed class SightCallException: Exception() {
     object EmptyParamsException : SightCallException()
     object NetworkConnectionException : SightCallException()
     class ServerErrorException(override val message: String? = null) : SightCallException()
+    class DatabaseErrorException(override val message: String? = null) : SightCallException()
+    class ElementNotFoundException(val elementName:String, override val message: String? = null) : SightCallException()
 }
