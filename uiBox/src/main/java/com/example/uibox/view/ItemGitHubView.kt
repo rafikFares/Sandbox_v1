@@ -8,11 +8,13 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.uibox.R
 import com.example.uibox.databinding.ItemGithubBinding
+import com.example.uibox.tools.GlideCacheLoad
 import com.example.uibox.tools.StringSource
 import com.example.uibox.tools.StringSourceData
 import com.example.uibox.tools.animateClick
 import com.example.uibox.tools.applyStringSource
 import com.example.uibox.tools.clickWithDebounce
+import com.example.uibox.tools.fromDpToPx
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -39,8 +41,7 @@ class ItemGitHubView @JvmOverloads constructor(
         clipToPadding = true
 
         shapeAppearanceModel = ShapeAppearanceModel.builder()
-            .setTopRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_25))
-            .setBottomRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_25))
+            .setAllCorners(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_25))
             .build()
     }
 
@@ -48,8 +49,7 @@ class ItemGitHubView @JvmOverloads constructor(
         with(binding) {
             itemName.applyStringSource(itemGitHubData.itemName)
             itemLanguage.applyStringSource(itemGitHubData.itemLanguage)
-            Glide.with(root)
-                .load(itemGitHubData.itemAvatarUrl)
+            root.GlideCacheLoad(itemGitHubData.itemAvatarUrl)
                 .into(avatarIcon)
         }
         clickWithDebounce {

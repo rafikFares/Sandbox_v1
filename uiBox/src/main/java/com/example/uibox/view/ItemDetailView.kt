@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.uibox.R
 import com.example.uibox.databinding.ViewItemDetailsBinding
+import com.example.uibox.tools.GlideCacheLoad
 import com.example.uibox.tools.StringSource
 import com.example.uibox.tools.StringSourceData
 import com.example.uibox.tools.applyStringSource
@@ -33,8 +34,7 @@ class ItemDetailsView @JvmOverloads constructor(
         with(binding) {
             itemName.applyStringSource(itemDetailData.itemName)
             itemLanguage.applyStringSource(itemDetailData.itemLanguage)
-            Glide.with(root)
-                .load(itemDetailData.itemAvatarUrl)
+            root.GlideCacheLoad(itemDetailData.itemAvatarUrl)
                 .into(itemIcon)
             itemDetailData.otherInformation.forEach {
                 val childView = createTextView(it)
