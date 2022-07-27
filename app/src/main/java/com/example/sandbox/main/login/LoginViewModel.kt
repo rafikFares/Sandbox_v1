@@ -33,6 +33,7 @@ class LoginViewModel(private val userAuthenticator: UserAuthenticator) : BaseVie
                 is Either.Failure -> {
                     log("Failurer", result.value)
                     _uiState.value = UiState.LoginError
+                    handleFailure(result.value)
                 }
                 is Either.Success -> {
                     _uiState.value = UiState.LoginSuccess

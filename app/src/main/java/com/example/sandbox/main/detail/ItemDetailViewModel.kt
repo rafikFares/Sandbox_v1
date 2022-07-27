@@ -1,6 +1,8 @@
 package com.example.sandbox.main.detail
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sandbox.BuildConfig
 import com.example.sandbox.core.exception.SandboxException
@@ -8,7 +10,6 @@ import com.example.sandbox.core.repository.data.GitHubItemDetails
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.core.usecase.FetchGitHubItemDetail
 import com.example.sandbox.main.platform.BaseViewModel
-import com.example.sandbox.main.start.StartViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -29,10 +30,11 @@ class ItemDetailViewModel(
     private val _uiState = MutableStateFlow<UiState>(UiState.Init)
     override val uiState: StateFlow<UiState> = _uiState
 
+    private val _itemDetail = MutableLiveData<GitHubItemDetails>()
+    val itemDetail: LiveData<GitHubItemDetails> = _itemDetail
+
     fun loadData(information: RemoteRepository.RepositoryInformation) {
-        viewModelScope.launch {
-            _uiState.value = UiState.Loading
-        }
+        updateUiState(UiState.Loading)
         fetchGitHubItemDetail(information, viewModelScope) {
             it.fold(::handleFailure, ::handleSuccess)
         }
@@ -40,15 +42,18 @@ class ItemDetailViewModel(
 
     override fun handleFailure(failure: SandboxException) {
         super.handleFailure(failure)
-        viewModelScope.launch {
-            _uiState.value = UiState.Error(failure)
-        }
+        updateUiState(UiState.Error(failure))
     }
 
     private fun handleSuccess(successData: GitHubItemDetails) {
         log("handleSuccess count : $successData")
+        _itemDetail.value = successData
+        updateUiState(UiState.UpdateData(successData))
+    }
+
+    private fun updateUiState(newState: UiState) {
         viewModelScope.launch {
-            _uiState.value = UiState.UpdateData(successData)
+            _uiState.value = newState
         }
     }
 
