@@ -23,4 +23,9 @@
         <item name="cornerSizeTopRight">30dp</item>
     </style>
 
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_10</item>
+    </style>
+
 </resources>
