@@ -27,5 +27,4 @@ class UserAuthenticatorImpl(private val preferenceRepository: PreferenceReposito
     override suspend fun logOut(): Either<SandboxException, Boolean> {
         TODO("Not yet implemented")
     }
-
 }
