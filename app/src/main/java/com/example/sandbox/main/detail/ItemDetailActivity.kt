@@ -6,14 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.sandbox.BuildConfig
+import com.example.sandbox.R
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.databinding.ActivityDetailsBinding
+import com.example.sandbox.main.platform.BaseAppcompatActivity
 import com.example.uibox.tools.StringSource
 import com.example.uibox.tools.animateClick
 import com.example.uibox.view.ItemDetailsView
@@ -23,7 +24,7 @@ import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ItemDetailActivity : AppCompatActivity() {
+class ItemDetailActivity : BaseAppcompatActivity() {
     private val itemDetailViewModel by viewModel<ItemDetailViewModel>()
 
     private lateinit var binding: ActivityDetailsBinding
@@ -101,10 +102,11 @@ class ItemDetailActivity : AppCompatActivity() {
                     .collect { state ->
                         when (state) {
                             is ItemDetailViewModel.UiState.Error -> {
-                                // show error alert ?
+                                manageError(state.exception) { finish() }
                             }
                             ItemDetailViewModel.UiState.Loading -> {
-                                // show loading ?
+                                binding.informationView.isVisible = false
+                                binding.detailLoading.isVisible = true
                             }
                             is ItemDetailViewModel.UiState.UpdateData -> {
                                 val tmpDetails = ItemDetailsView.ItemDetailData(
@@ -116,9 +118,13 @@ class ItemDetailActivity : AppCompatActivity() {
                                         StringSource.String(state.gitHubItemDetails.repositorySshUrl),
                                         StringSource.String(state.gitHubItemDetails.repositoryDefaultBranch),
                                         StringSource.String(state.gitHubItemDetails.repositoryLicence.orEmpty())
-                                    )
+                                    ),
+                                    lottieEndAnimation = R.raw.halloween
                                 )
                                 binding.informationView.initDetails(tmpDetails)
+
+                                binding.detailLoading.isVisible = false
+                                binding.informationView.isVisible = true
                             }
                             else -> {
                                 // nothing

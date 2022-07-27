@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sandbox.BuildConfig
+import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.data.GitHubItem
 import com.example.sandbox.core.usecase.FetchGitHubItems
-import com.example.sandbox.main.detail.ItemDetailViewModel
 import com.example.sandbox.main.home.adapter.HomeAdapter
 import com.example.sandbox.main.platform.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +23,9 @@ class HomeViewModel(
 
     sealed interface UiState : BaseUiState {
         object Init : UiState
+        object Complete : UiState
+        object Loading : UiState
+        data class Error(val exception: SandboxException) : UiState
         data class ItemClick(val item: GitHubItem) : UiState
     }
 
@@ -35,24 +38,37 @@ class HomeViewModel(
     val homeAdapter: HomeAdapter = HomeAdapter(this)
 
     override fun onCreate(owner: LifecycleOwner) {
-        loadData() // default with "text" as string
+        loadData("text") // default with "text" as string
     }
 
-    private fun loadData(params: String? = null) = fetchGitHubItems(params, viewModelScope) {
-        it.fold(::handleFailure, ::handleSuccess)
+    private fun loadData(params: String? = null) {
+        updateUiState(UiState.Loading)
+        fetchGitHubItems(params, viewModelScope) {
+            it.fold(::handleFailure, ::handleSuccess)
+        }
     }
 
-    private fun handleSuccess(success: List<GitHubItem>) {
-        log("handleSuccess count : ${success.count()}")
-        _gitHubItems.value = success
-        homeAdapter.submitList(success)
+    private fun handleSuccess(successData: List<GitHubItem>) {
+        log("handleSuccess count : ${successData.count()}")
+        updateUiState(UiState.Complete)
+        _gitHubItems.value = successData
+        homeAdapter.submitList(successData)
+    }
+
+    override fun handleFailure(failure: SandboxException) {
+        super.handleFailure(failure)
+        updateUiState(UiState.Error(failure))
+    }
+
+    private fun updateUiState(newState: UiState) {
+        viewModelScope.launch {
+            _uiState.value = newState
+        }
     }
 
     fun handleItemClick(item: GitHubItem) {
         log("handleItemClick item : $item")
-        viewModelScope.launch {
-            _uiState.value = UiState.ItemClick(item)
-        }
+        updateUiState(UiState.ItemClick(item))
     }
 
     val searchAction: (String) -> Unit = {

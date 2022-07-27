@@ -45,10 +45,10 @@ class ItemDetailViewModel(
         }
     }
 
-    private fun handleSuccess(success: GitHubItemDetails) {
-        log("handleSuccess count : $success")
+    private fun handleSuccess(successData: GitHubItemDetails) {
+        log("handleSuccess count : $successData")
         viewModelScope.launch {
-            _uiState.value = UiState.UpdateData(success)
+            _uiState.value = UiState.UpdateData(successData)
         }
     }
 

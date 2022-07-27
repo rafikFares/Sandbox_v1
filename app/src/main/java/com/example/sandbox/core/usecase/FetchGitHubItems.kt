@@ -21,7 +21,8 @@ class FetchGitHubItems(
 
         // if there is no network than we will check in local database
         result.ifIsFailureWithThan(SandboxException.NetworkConnectionException) {
-            return localRepository.retrieveItemsOf(params)
+            val localData = localRepository.retrieveItemsOf(params).takeIf { it.isSuccessful }
+            return localData ?: result
         }
         // if the request was a success than we save data into local database
         result.ifIsSuccessThan {

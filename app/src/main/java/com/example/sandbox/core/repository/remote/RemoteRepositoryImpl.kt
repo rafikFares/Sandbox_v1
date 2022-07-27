@@ -22,9 +22,9 @@ class RemoteRepositoryImpl(
         withContext(ioDispatcher) {
             if (networkHandler.isNetworkAvailable()) {
                 try {
-                    val response = serviceApi.fetchRepositories(
-                        params ?: "text"
-                    ) // for the moment i don't return "EmptyParamsException" but i just use "text" as default
+                    if (params.isNullOrBlank()) return@withContext Either.Failure(SandboxException.EmptyParamsException)
+
+                    val response = serviceApi.fetchRepositories(params)
                     if (response.isSuccessful) {
                         val bodyData = response.body()?.items ?: emptyList()
                         val result = bodyData.map {
