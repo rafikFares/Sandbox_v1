@@ -4,9 +4,9 @@ import com.example.sandbox.BaseUnitTest
 import com.example.sandbox.core.repository.local.LocalRepository
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.core.utils.Either
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlinx.coroutines.runBlocking
@@ -46,10 +46,8 @@ class FetchGitHubItemsTest: BaseUnitTest() {
 
         result shouldBeInstanceOf Either.Success::class.java
         (result as Either.Success).value shouldBeEqualTo emptyList()
-        verify(exactly = 1) {
-            runBlocking {
-                remoteRepository.retrieveItems(any())
-            }
+        coVerify(exactly = 1) {
+            remoteRepository.retrieveItems(any())
         }
     }
 }

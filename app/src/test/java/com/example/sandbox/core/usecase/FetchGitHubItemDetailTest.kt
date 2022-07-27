@@ -4,9 +4,9 @@ import com.example.sandbox.BaseUnitTest
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.core.utils.Either
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -40,10 +40,8 @@ class FetchGitHubItemDetailTest: BaseUnitTest() {
 
         result shouldBeInstanceOf Either.Failure::class.java
         (result as Either.Failure).value shouldBeEqualTo SandboxException.NetworkConnectionException
-        verify(exactly = 1) {
-            runBlocking {
-                remoteRepository.retrieveItemDetailOf(any())
-            }
+        coVerify (exactly = 1) {
+            remoteRepository.retrieveItemDetailOf(any())
         }
     }
 }

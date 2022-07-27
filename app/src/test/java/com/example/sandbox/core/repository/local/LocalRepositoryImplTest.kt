@@ -6,9 +6,9 @@ import com.example.sandbox.core.repository.data.GitHubItem
 import com.example.sandbox.core.repository.local.dao.ItemDao
 import com.example.sandbox.core.repository.local.entity.NodeEntity
 import com.example.sandbox.core.utils.Either
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,10 +47,8 @@ class LocalRepositoryImplTest : BaseUnitTest() {
         val result = localRepository.insertItem("test", emptyList())
         result shouldBeInstanceOf Either.Success::class.java
         (result as Either.Success).value shouldBe true
-        verify(exactly = 1) {
-            runBlocking {
-                itemDao.insertItem(any())
-            }
+        coVerify(exactly = 1) {
+            itemDao.insertItem(any())
         }
     }
 
