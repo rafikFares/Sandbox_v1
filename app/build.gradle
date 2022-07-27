@@ -127,6 +127,9 @@ dependencies {
     // Facebook shimmer
     implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
     // tests
     testImplementation "junit:junit:4.13.2"
     testImplementation "io.mockk:mockk:1.12.1"
