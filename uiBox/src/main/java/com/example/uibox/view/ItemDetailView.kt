@@ -3,11 +3,11 @@ package com.example.uibox.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.annotation.RawRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
 import com.example.uibox.R
 import com.example.uibox.databinding.ViewItemDetailsBinding
 import com.example.uibox.tools.GlideCacheLoad
@@ -25,7 +25,8 @@ class ItemDetailsView @JvmOverloads constructor(
         @StringSourceData val itemName: StringSource,
         @StringSourceData val itemLanguage: StringSource,
         val itemAvatarUrl: String,
-        val otherInformation: List<StringSource>
+        val otherInformation: List<StringSource>,
+        @RawRes val lottieEndAnimation: Int? = null
     )
 
     private val binding = ViewItemDetailsBinding.inflate(LayoutInflater.from(context), this)
@@ -39,6 +40,10 @@ class ItemDetailsView @JvmOverloads constructor(
             itemDetailData.otherInformation.forEach {
                 val childView = createTextView(it)
                 itemInformationContainer.addView(childView)
+            }
+
+            itemDetailData.lottieEndAnimation?.let {
+                endAnimation.setAnimation(it)
             }
         }
         return this
