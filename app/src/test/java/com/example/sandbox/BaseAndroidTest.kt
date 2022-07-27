@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
@@ -15,7 +16,11 @@ import org.robolectric.annotation.Config
     manifest = Config.NONE,
     sdk = [Build.VERSION_CODES.O]
 )
-abstract class BaseAndroidTest: BaseTest {
+abstract class BaseAndroidTest : BaseTest {
+
+    init {
+        stopKoin()
+    }
 
     @Suppress("LeakingThis")
     @Rule

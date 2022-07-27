@@ -13,13 +13,15 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Assert
 
-
+@ExperimentalCoroutinesApi
 class LocalRepositoryImplTest : BaseUnitTest() {
+    private val unconfinedDispatcher = UnconfinedTestDispatcher()
 
     @MockK
     private lateinit var itemDao: ItemDao
@@ -28,7 +30,7 @@ class LocalRepositoryImplTest : BaseUnitTest() {
 
     @BeforeTest
     fun before() {
-        localRepository = LocalRepositoryImpl(itemDao)
+        localRepository = LocalRepositoryImpl(itemDao, unconfinedDispatcher)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

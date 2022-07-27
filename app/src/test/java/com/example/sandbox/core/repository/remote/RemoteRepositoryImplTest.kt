@@ -10,12 +10,14 @@ import io.mockk.impl.annotations.MockK
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 
-
+@ExperimentalCoroutinesApi
 class RemoteRepositoryImplTest : BaseUnitTest() {
+    private val unconfinedDispatcher = UnconfinedTestDispatcher()
 
     @MockK
     private lateinit var networkHandler: NetworkHandler
@@ -27,7 +29,7 @@ class RemoteRepositoryImplTest : BaseUnitTest() {
 
     @BeforeTest
     fun before() {
-        remoteDataRepository = RemoteRepositoryImpl(serviceApi, networkHandler)
+        remoteDataRepository = RemoteRepositoryImpl(serviceApi, networkHandler, unconfinedDispatcher)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
