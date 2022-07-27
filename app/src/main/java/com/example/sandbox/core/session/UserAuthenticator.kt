@@ -1,5 +1,8 @@
 package com.example.sandbox.core.session
 
+import com.example.sandbox.core.exception.SandboxException
+import com.example.sandbox.core.utils.Either
+
 
 interface UserAuthenticator {
 
@@ -15,6 +18,6 @@ interface UserAuthenticator {
         }
     }
 
-    fun login(user: User): Boolean
-    fun logOut(): Boolean
+    suspend fun login(user: User): Either<SandboxException, Boolean>
+    suspend fun logOut(): Either<SandboxException, Boolean>
 }
