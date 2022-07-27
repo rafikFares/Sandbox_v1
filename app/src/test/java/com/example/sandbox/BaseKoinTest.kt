@@ -24,8 +24,8 @@ abstract class BaseKoinTest : KoinTest, BaseAndroidTest() {
                     dispatcherModule +
                         networkModule +
                         dataBaseModule +
-                        defaultModule +
-                        appModule
+                        appModule +
+                        defaultModule
                 )
             }
         }

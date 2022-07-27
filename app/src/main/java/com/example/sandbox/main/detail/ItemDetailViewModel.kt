@@ -8,12 +8,13 @@ import com.example.sandbox.core.repository.data.GitHubItemDetails
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.core.usecase.FetchGitHubItemDetail
 import com.example.sandbox.main.platform.BaseViewModel
+import com.example.sandbox.main.start.StartViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
+@KoinViewModel(binds = [ItemDetailViewModel::class])
 class ItemDetailViewModel(
     private val fetchGitHubItemDetail: FetchGitHubItemDetail
 ) : BaseViewModel() {

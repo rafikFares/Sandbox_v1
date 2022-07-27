@@ -29,9 +29,8 @@ class SandboxApplication : Application() {
                 dispatcherModule +
                     networkModule +
                     dataBaseModule +
-                    defaultModule +
-                    appModule
-
+                    appModule +
+                    defaultModule
             )
         }
     }

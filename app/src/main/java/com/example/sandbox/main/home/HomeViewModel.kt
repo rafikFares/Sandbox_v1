@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.sandbox.BuildConfig
 import com.example.sandbox.core.repository.data.GitHubItem
 import com.example.sandbox.core.usecase.FetchGitHubItems
+import com.example.sandbox.main.detail.ItemDetailViewModel
 import com.example.sandbox.main.home.adapter.HomeAdapter
 import com.example.sandbox.main.platform.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
+@KoinViewModel(binds = [HomeViewModel::class])
 class HomeViewModel(
     private val fetchGitHubItems: FetchGitHubItems
 ) : BaseViewModel() {
