@@ -6,13 +6,12 @@ import com.example.sandbox.core.repository.data.GitHubItem
 import com.example.sandbox.core.repository.local.dao.ItemDao
 import com.example.sandbox.core.repository.local.entity.NodeEntity
 import com.example.sandbox.core.utils.Either
+import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBe
@@ -64,11 +63,9 @@ class LocalRepositoryImplTest : BaseUnitTest() {
     @Test
     fun retrieveItemNotFoundException() = runTest {
         val searchText = "test"
-        every {
-            runBlocking {
-                itemDao.retrieveItem(any())
-            }
-        } returns null
+        coEvery {
+            itemDao.retrieveItem(any())
+        } returns  null
         val result = localRepository.retrieveItemsOf(searchText)
         result shouldBeInstanceOf Either.Failure::class.java
         val exception = (result as Either.Failure).value
@@ -80,10 +77,8 @@ class LocalRepositoryImplTest : BaseUnitTest() {
     fun retrieveItemSuccess() = runTest {
         val searchText = "test"
         val nodeEntity = NodeEntity()
-        every {
-            runBlocking {
-                itemDao.retrieveItem(any())
-            }
+        coEvery {
+            itemDao.retrieveItem(any())
         } returns nodeEntity
         val result = localRepository.retrieveItemsOf(searchText)
         result shouldBeInstanceOf Either.Success::class.java

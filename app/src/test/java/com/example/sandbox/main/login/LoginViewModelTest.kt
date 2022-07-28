@@ -4,11 +4,10 @@ import com.example.sandbox.BaseAndroidTest
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.session.UserAuthenticator
 import com.example.sandbox.core.utils.Either
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldBe
 
 
@@ -26,10 +25,8 @@ class LoginViewModelTest : BaseAndroidTest() {
 
     @Test
     fun testLoginSuccessUpdateUiStateLiveData() {
-        every {
-            runBlocking {
-                userAuthenticator.login(any())
-            }
+        coEvery {
+            userAuthenticator.login(any())
         } returns Either.Success(true)
 
         loginViewModel.login("test", "test")
@@ -41,10 +38,8 @@ class LoginViewModelTest : BaseAndroidTest() {
     @Test
     fun testLoginFailUpdateUiStateLiveData() {
         val exception = SandboxException.LoginException("nothing")
-        every {
-            runBlocking {
-                userAuthenticator.login(any())
-            }
+        coEvery {
+            userAuthenticator.login(any())
         } returns Either.Failure(exception)
 
         loginViewModel.login("test", "test")

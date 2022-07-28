@@ -4,7 +4,7 @@ import com.example.sandbox.BaseUnitTest
 import com.example.sandbox.core.repository.preference.PreferenceRepository
 import com.example.sandbox.core.repository.preference.key.PreferenceKey
 import com.example.sandbox.core.utils.empty
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlin.test.BeforeTest
 import kotlinx.coroutines.runBlocking
@@ -26,10 +26,8 @@ class UserSessionImplTest: BaseUnitTest() {
 
     @Test
     fun testUserLoggedInSuccess() {
-        every {
-            runBlocking {
-                preferenceRepository.get(PreferenceKey.UserToken, any())
-            }
+        coEvery {
+            preferenceRepository.get(PreferenceKey.UserToken, any())
         } returns "not empty"
 
         val result = runBlocking {
@@ -41,10 +39,8 @@ class UserSessionImplTest: BaseUnitTest() {
 
     @Test
     fun testUserLoggedInFail() {
-        every {
-            runBlocking {
-                preferenceRepository.get(PreferenceKey.UserToken, any())
-            }
+        coEvery {
+            preferenceRepository.get(PreferenceKey.UserToken, any())
         } returns String.empty()
 
         val result = runBlocking {

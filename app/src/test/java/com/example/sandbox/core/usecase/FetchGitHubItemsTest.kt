@@ -4,8 +4,8 @@ import com.example.sandbox.BaseUnitTest
 import com.example.sandbox.core.repository.local.LocalRepository
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.core.utils.Either
+import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -26,15 +26,11 @@ class FetchGitHubItemsTest: BaseUnitTest() {
     @BeforeTest
     fun setUp() {
         fetchGitHubItems = FetchGitHubItems(remoteRepository, localRepository)
-        every {
-            runBlocking {
-                remoteRepository.retrieveItems(any())
-            }
+        coEvery {
+            remoteRepository.retrieveItems(any())
         } returns Either.Success(emptyList())
-        every {
-            runBlocking {
-                localRepository.insertItem(any(), any())
-            }
+        coEvery {
+            localRepository.insertItem(any(), any())
         } returns Either.Success(true)
     }
 

@@ -4,7 +4,7 @@ import com.example.sandbox.BaseUnitTest
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.preference.PreferenceRepository
 import com.example.sandbox.core.utils.Either
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -22,10 +22,8 @@ class UserAuthenticatorImplTest : BaseUnitTest() {
     @BeforeTest
     fun setUp() {
         userAuthenticator = UserAuthenticatorImpl(preferenceRepository)
-        every {
-            runBlocking {
-                preferenceRepository.save(any(), any() as String)
-            }
+        coEvery {
+            preferenceRepository.save(any(), any() as String)
         } returns Unit
     }
 
@@ -45,5 +43,18 @@ class UserAuthenticatorImplTest : BaseUnitTest() {
         result shouldBeInstanceOf Either.Failure::class.java
         val exception = (result as Either.Failure).value
         exception shouldBeEqualTo SandboxException.LoginException("$adminUser")
+    }
+
+    @Test
+    fun testLogOutUserSuccess() = runBlocking {
+        coEvery {
+            preferenceRepository.delete(any())
+        } returns true
+        val adminUser = UserAuthenticator.User.default
+        userAuthenticator.login(adminUser)
+
+        val result = userAuthenticator.logOut()
+
+        result shouldBeInstanceOf Either.Success::class.java
     }
 }

@@ -4,8 +4,8 @@ import com.example.sandbox.BaseUnitTest
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.remote.RemoteRepository
 import com.example.sandbox.core.utils.Either
+import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldBeEqualTo
@@ -25,10 +25,8 @@ class FetchGitHubItemDetailTest: BaseUnitTest() {
     @BeforeTest
     fun setUp() {
         fetchGitHubItemDetail = FetchGitHubItemDetail(remoteRepository)
-        every {
-            runBlocking {
-                remoteRepository.retrieveItemDetailOf(params)
-            }
+        coEvery {
+            remoteRepository.retrieveItemDetailOf(params)
         } returns Either.Failure(SandboxException.NetworkConnectionException)
     }
 
