@@ -14,9 +14,9 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 
 
-class FetchGitHubItemsTest: BaseUnitTest() {
+class FetchGitHubItemsUseCaseTest: BaseUnitTest() {
 
-    private lateinit var fetchGitHubItems: FetchGitHubItems
+    private lateinit var fetchGitHubItemsUseCase: FetchGitHubItemsUseCase
 
     @MockK
     private lateinit var remoteRepository: RemoteRepository
@@ -25,7 +25,7 @@ class FetchGitHubItemsTest: BaseUnitTest() {
 
     @BeforeTest
     fun setUp() {
-        fetchGitHubItems = FetchGitHubItems(remoteRepository, localRepository)
+        fetchGitHubItemsUseCase = FetchGitHubItemsUseCase(remoteRepository, localRepository)
         coEvery {
             remoteRepository.retrieveItems(any())
         } returns Either.Success(emptyList())
@@ -37,7 +37,7 @@ class FetchGitHubItemsTest: BaseUnitTest() {
     @Test
     fun fetchGitHubItemsRunIsSuccess() {
         val result = runBlocking {
-            fetchGitHubItems.run("")
+            fetchGitHubItemsUseCase.run("")
         }
 
         result shouldBeInstanceOf Either.Success::class.java

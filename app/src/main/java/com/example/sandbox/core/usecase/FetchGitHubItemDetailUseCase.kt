@@ -8,7 +8,7 @@ import com.example.sandbox.core.utils.Either
 import org.koin.core.annotation.Single
 
 @Single
-class FetchGitHubItemDetail(private val remoteRepository: RemoteRepository):
+class FetchGitHubItemDetailUseCase(private val remoteRepository: RemoteRepository):
     UseCase<GitHubItemDetails, RemoteRepository.RepositoryInformation>() {
 
     override suspend fun run(params: RemoteRepository.RepositoryInformation?): Either<SandboxException, GitHubItemDetails> {

@@ -3,7 +3,7 @@ package com.example.sandbox.main.home
 import com.example.sandbox.BaseAndroidTest
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.data.GitHubItem
-import com.example.sandbox.core.usecase.FetchGitHubItems
+import com.example.sandbox.core.usecase.FetchGitHubItemsUseCase
 import com.example.sandbox.core.utils.Either
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -16,12 +16,12 @@ import org.amshove.kluent.shouldBeInstanceOf
 class HomeViewModelTest : BaseAndroidTest() {
 
     @MockK
-    private lateinit var fetchGitHubItems: FetchGitHubItems
+    private lateinit var fetchGitHubItemsUseCase: FetchGitHubItemsUseCase
     private lateinit var homeViewModel: HomeViewModel
 
     @BeforeTest
     fun setUp() {
-        homeViewModel = HomeViewModel(fetchGitHubItems)
+        homeViewModel = HomeViewModel(fetchGitHubItemsUseCase)
     }
 
     @Test
@@ -60,7 +60,7 @@ class HomeViewModelTest : BaseAndroidTest() {
         )
         val resultList = listOf<GitHubItem>(item)
         coEvery {
-            fetchGitHubItems.run(any())
+            fetchGitHubItemsUseCase.run(any())
         } returns Either.Success(resultList)
 
         homeViewModel.gitHubItems.observeForever {
@@ -74,7 +74,7 @@ class HomeViewModelTest : BaseAndroidTest() {
     fun testHandleFailureAndUpdateFailureLiveData() {
         val exception = SandboxException.NetworkConnectionException
         coEvery {
-            fetchGitHubItems.run(any())
+            fetchGitHubItemsUseCase.run(any())
         } returns Either.Failure(exception)
 
         homeViewModel.failure.observeForever {

@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.sandbox.BuildConfig
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.data.GitHubItem
-import com.example.sandbox.core.usecase.FetchGitHubItems
+import com.example.sandbox.core.usecase.FetchGitHubItemsUseCase
 import com.example.sandbox.main.home.adapter.HomeAdapter
 import com.example.sandbox.main.platform.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel(binds = [HomeViewModel::class])
 class HomeViewModel(
-    private val fetchGitHubItems: FetchGitHubItems
+    private val fetchGitHubItemsUseCase: FetchGitHubItemsUseCase
 ) : BaseViewModel() {
 
     sealed interface UiState : BaseUiState {
@@ -43,7 +43,7 @@ class HomeViewModel(
 
     private fun loadData(params: String? = null) {
         updateUiState(UiState.Loading)
-        fetchGitHubItems(params, viewModelScope) {
+        fetchGitHubItemsUseCase(params, viewModelScope) {
             it.fold(::handleFailure, ::handleSuccess)
         }
     }

@@ -11,7 +11,7 @@ import com.example.sandbox.core.utils.ifIsSuccessThan
 import org.koin.core.annotation.Single
 
 @Single
-class FetchGitHubItems(
+class FetchGitHubItemsUseCase(
     private val remoteRepository: RemoteRepository,
     private val localRepository: LocalRepository
 ) : UseCase<List<GitHubItem>, String>() {

@@ -14,8 +14,8 @@ import org.junit.Test
 import kotlin.test.BeforeTest
 
 
-class FetchGitHubItemDetailTest: BaseUnitTest() {
-    private lateinit var fetchGitHubItemDetail: FetchGitHubItemDetail
+class FetchGitHubItemDetailUseCaseTest: BaseUnitTest() {
+    private lateinit var fetchGitHubItemDetailUseCase: FetchGitHubItemDetailUseCase
 
     @MockK
     private lateinit var remoteRepository: RemoteRepository
@@ -24,7 +24,7 @@ class FetchGitHubItemDetailTest: BaseUnitTest() {
 
     @BeforeTest
     fun setUp() {
-        fetchGitHubItemDetail = FetchGitHubItemDetail(remoteRepository)
+        fetchGitHubItemDetailUseCase = FetchGitHubItemDetailUseCase(remoteRepository)
         coEvery {
             remoteRepository.retrieveItemDetailOf(params)
         } returns Either.Failure(SandboxException.NetworkConnectionException)
@@ -33,7 +33,7 @@ class FetchGitHubItemDetailTest: BaseUnitTest() {
     @Test
     fun fetchGitHubItemDetailsRunIsFailure() {
         val result = runBlocking {
-            fetchGitHubItemDetail.run(params)
+            fetchGitHubItemDetailUseCase.run(params)
         }
 
         result shouldBeInstanceOf Either.Failure::class.java

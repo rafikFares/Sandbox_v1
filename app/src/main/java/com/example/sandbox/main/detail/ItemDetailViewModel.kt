@@ -8,7 +8,7 @@ import com.example.sandbox.BuildConfig
 import com.example.sandbox.core.exception.SandboxException
 import com.example.sandbox.core.repository.data.GitHubItemDetails
 import com.example.sandbox.core.repository.remote.RemoteRepository
-import com.example.sandbox.core.usecase.FetchGitHubItemDetail
+import com.example.sandbox.core.usecase.FetchGitHubItemDetailUseCase
 import com.example.sandbox.main.platform.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +17,7 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel(binds = [ItemDetailViewModel::class])
 class ItemDetailViewModel(
-    private val fetchGitHubItemDetail: FetchGitHubItemDetail
+    private val fetchGitHubItemDetailUseCase: FetchGitHubItemDetailUseCase
 ) : BaseViewModel() {
 
     sealed interface UiState : BaseUiState {
@@ -35,7 +35,7 @@ class ItemDetailViewModel(
 
     fun loadData(information: RemoteRepository.RepositoryInformation) {
         updateUiState(UiState.Loading)
-        fetchGitHubItemDetail(information, viewModelScope) {
+        fetchGitHubItemDetailUseCase(information, viewModelScope) {
             it.fold(::handleFailure, ::handleSuccess)
         }
     }
