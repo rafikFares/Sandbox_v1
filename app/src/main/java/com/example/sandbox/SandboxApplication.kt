@@ -2,6 +2,8 @@ package com.example.sandbox
 
 import android.app.Application
 import android.content.Context
+import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.sandbox.core.di.appModule
 import com.example.sandbox.core.di.dataBaseModule
 import com.example.sandbox.core.di.dispatcherModule
@@ -32,6 +34,19 @@ class SandboxApplication : Application() {
                     appModule +
                     defaultModule
             )
+        }
+
+        val nightModeFlag = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        when (nightModeFlag) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            Configuration.UI_MODE_NIGHT_YES -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
         }
     }
 }

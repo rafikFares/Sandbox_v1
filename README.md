@@ -11,6 +11,7 @@
 - Material components for styling
 - StateFlows for ui updates
 - UseCase Pattern for data management
+- LeakCanary
 - KSP for annotation proccessor
 - KAPT for Glide 😥
 - Kotlin Serialization for serialization 

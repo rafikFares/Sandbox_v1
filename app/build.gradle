@@ -142,6 +142,9 @@ dependencies {
     // Lottie
     implementation "com.airbnb.android:lottie:$lottie_version"
 
+    // Leak Canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary_version"
+
     // tests
     testImplementation "junit:junit:4.13.2"
     testImplementation "io.mockk:mockk:1.12.1"
