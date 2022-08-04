@@ -27,6 +27,11 @@
 - USERNAME : admin
 - PASSWORD : admin
 
+## Coming next : 
+- Compose [Branch]
+- Hilt instead of Koin [Branch]
+- Flow Pattern instead of UseCase Pattern for data management [Branch]
+
 ## Todo : 
 - replace loading by Facebook Shimmer ?
 - maybe show more information in item detail view ?
