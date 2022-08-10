@@ -16,20 +16,16 @@ class ItemDaoImpl(private val realmDb: Realm) : ItemDao {
     }
 
     override suspend fun retrieveItem(searchText: String): NodeEntity? {
-        return realmDb.write {
-            query<NodeEntity>("searchText == $0", searchText)
+        return realmDb.query<NodeEntity>("searchText == $0", searchText)
                 .first().find()
-        }
     }
 
     override suspend fun retrieveAllItems(): List<NodeEntity> {
         val items = mutableListOf<NodeEntity>()
-        realmDb.write {
             items.addAll(
-                query<NodeEntity>()
+                realmDb.query<NodeEntity>()
                     .find()
             )
-        }
         return items
     }
 }
